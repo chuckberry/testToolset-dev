@@ -42,16 +42,16 @@ case "$1" in
 		;;
 	experimental)
 		echo "experimental profile selected"
-		DIM_LIST="2 16"
+		DIM_LIST="16"
 		NR_TRY_PERFORMANCE_TEST="5"
 		TASK_LIST="wave0 wave1 wave2 wave3 mixer0 mixer1 mixer2"
-		NUM_REPEAT_PERF="1"
+		NUM_REPEAT_PERF="5"
 		TA_MAKE_PERFORMANCE_TEST="1"
 		TA_MAKE_FUNC_TEST="0"
-		FUNC_LIST="task_woken_rt() pull_rt_task() push_rt_task()"
+		FUNC_LIST="push_rt_task() pull_rt_task()"
 		FUNC_TASK_LIST="wave0 wave1 wave2 wave3 mixer0 mixer1 mixer2 monitor"
-		DIM_FUNC_LIST="16"
-		NR_TRY_FUNC_TEST="10"
+		DIM_FUNC_LIST="2 16"
+		NR_TRY_FUNC_TEST="2"
 		;;
 	performance)
 		echo "performance profile selected"
