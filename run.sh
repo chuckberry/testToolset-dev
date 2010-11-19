@@ -176,7 +176,7 @@ if [ $TA_MAKE_PERFORMANCE_TEST == 1 ]; then
 				LOG_RUN="run_$bench_`uname -r`_${i}_${d}.log" 
 				echo "" >> $LOG_RUN 
 				echo "---> Performance test: Start $bench with $d KB buffer dimension (Try $i)" >> $LOG_RUN
-				BENCH=`echo "$TA_BMARKS" | grep $d`
+				BENCH=`echo "$TA_BMARKS" | grep $d | head -n 1`
 				prepare_for_benchmark >> $LOG_RUN
 				$bench -b "$BENCH" -i "$i" -d "$d" >> $LOG_RUN 2>&1
 				restore_from_benchmark >> $LOG_RUN
@@ -265,7 +265,7 @@ if [[ $NEXT_KERNEL != $TA_START_IMAGE ]]; then
 	# copy all kernel stuff under name _test_kernel
 	# use \cp because cp is cp -i alias
 	pushd $TA_IMAGES_PATH >/dev/null
-	\cp initrd-$VERSION.img /boot/initrd-$TEST_KERNEL.img 
+	\cp initrd.img-$VERSION /boot/initrd.img-$TEST_KERNEL
 	\cp vmlinuz-$VERSION /boot/vmlinuz-$TEST_KERNEL	
 	popd >/dev/null #I'm in TA_BASE
 
@@ -278,7 +278,7 @@ if [[ $NEXT_KERNEL != $TA_START_IMAGE ]]; then
 	echo `basename $0` > $RUNNING_BENCH
 	echo "update .running_bench ..." >> $LOG_DATA
 	#echo "reboot"
-	reboot	
+#	reboot	
 else
 	# generate graphics
 	pushd $TA_RESULTS_PATH >/dev/null

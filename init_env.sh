@@ -42,10 +42,10 @@ case "$1" in
 		;;
 	experimental)
 		echo "experimental profile selected"
-		DIM_LIST="16"
-		NR_TRY_PERFORMANCE_TEST="5"
+		DIM_LIST="2 4 8 16 32"
+		NR_TRY_PERFORMANCE_TEST="1"
 		TASK_LIST="wave0 wave1 wave2 wave3 mixer0 mixer1 mixer2"
-		NUM_REPEAT_PERF="5"
+		NUM_REPEAT_PERF="3"
 		TA_MAKE_PERFORMANCE_TEST="1"
 		TA_MAKE_FUNC_TEST="0"
 		FUNC_LIST="push_rt_task() pull_rt_task()"
@@ -61,7 +61,6 @@ case "$1" in
 		TASK_LIST="wave0 wave1 wave2 wave3 mixer0 mixer1 mixer2"
 		NUM_REPEAT_PERF="10"
 		TA_MAKE_FUNC_TEST="0"
-		SECTION_LIST="vanilla exper1 exper2 exper3 exper4"
 		;;
 	function)	
 		echo "function profile selected"
@@ -99,16 +98,16 @@ case "$1" in
 		;;
 	cpuaffinity)
 		echo "cpuaffinity profile selected"
-		DIM_LIST="2 4 8 16"
-		NR_TRY_PERFORMANCE_TEST="5"
-		TA_MAKE_PERFORMANCE_TEST="1"
+		DIM_LIST="2 4 8 16 32"
+		NR_TRY_PERFORMANCE_TEST="1"
 		TASK_LIST="wave0 wave1 wave2 wave3 mixer0 mixer1 mixer2"
-		NUM_REPEAT_PERF="10"
+		NUM_REPEAT_PERF="3"
+		TA_MAKE_PERFORMANCE_TEST="1"
+		TA_MAKE_FUNC_TEST="0"
 		FUNC_LIST="cpupri_find()"
 		DIM_FUNC_LIST="2"
 		NR_TRY_FUNC_TEST="2"
-		TA_MAKE_FUNC_TEST="1"
-		CPUAFF_TEST="optim worst"
+		CPUAFF_TEST="optim"
 		;;	
 	\?) 
 		print_usage	
@@ -123,7 +122,6 @@ TEMP_LIST=`ls -l images | grep img | awk -F'_' '{print $NF}' | sed -e 's/\.img//
 # tricky to remove \n character
 SECTION_LIST=`echo $TEMP_LIST` 
  
-
 cat init.env | \
 sed -e 's/TA_CONFIGURED=.*/TA_CONFIGURED=1/g'\
  -e 's/DIM_LIST=.*/DIM_LIST="'"$DIM_LIST"'"/g'\
