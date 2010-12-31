@@ -219,7 +219,7 @@ do
 #				"fdr of task: $i (us) Avg = $AVG_FUN Var = $VAR_FUN `uname -r`"  "Percentage" "Time (ns)"
 
 	# compute avg sched latency of each task
-	zcat $DATA_FOLDER/$TRACE_FILE | sed -e '/^#/d' -e 's/: /:/g' | get_task_schedlat.sh $i > $DATA_FOLDER/$SAMPLE_SCHED_LAT_TASK
+#	zcat $DATA_FOLDER/$TRACE_FILE | sed -e '/^#/d' -e 's/: /:/g' | get_task_schedlat.sh $i > $DATA_FOLDER/$SAMPLE_SCHED_LAT_TASK
 	
 #	AVG_FUN=`calc_stat.sh -f "$DATA_FOLDER/$SAMPLE_SCHED_LAT_TASK" -n 1 -a`
 #	# compute uncertainty
@@ -237,15 +237,15 @@ do
 	# statistcs
 	NR_MIGR=`cat $DATA_FOLDER/$SAMPLE_TIME_TASK | grep "migr" | awk '{print $NF}'` 
 	EXEC_TASK_STATS="Exec_time_stat:`calc_stat.sh -f "$DATA_FOLDER/$SAMPLE_TIME_TASK" -n 1 -l`"
-	LAT_TASK_STATS="Sched_lat_stat:`calc_stat.sh -f "$DATA_FOLDER/$SAMPLE_SCHED_LAT_TASK" -n 1 -l`"
-	ALL_STATS="$EXEC_TASK_STATS migr = $NR_MIGR $LAT_TASK_STATS"
+#	LAT_TASK_STATS="Sched_lat_stat:`calc_stat.sh -f "$DATA_FOLDER/$SAMPLE_SCHED_LAT_TASK" -n 1 -l`"
+	ALL_STATS="$EXEC_TASK_STATS migr = $NR_MIGR" # $LAT_TASK_STATS"
 
 	echo "$TAG<$i>$ALL_STATS" >> $DATA_FOLDER/$STATS_FILE
 
 	# compress files
 	gzip $DATA_FOLDER/$SAMPLE_TIME_TASK
 #	gzip $DATA_FOLDER/$PERC_FILE_TIME_TASK
-	gzip $DATA_FOLDER/$SAMPLE_SCHED_LAT_TASK
+#	gzip $DATA_FOLDER/$SAMPLE_SCHED_LAT_TASK
 #	gzip $DATA_FOLDER/$PERC_FILE_SCHED_LAT_TASK
 
 done

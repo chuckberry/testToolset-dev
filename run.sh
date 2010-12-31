@@ -212,7 +212,7 @@ if [ $TA_MAKE_FUNC_TEST == 1 ]; then
 			    LOG_RUN="func_test_$bench_`uname -r`_${i}_${d}.log"
 			    echo "" >> $LOG_RUN
 			    echo "---> Function call test: Start stat_func with $d KB buffer dimension (Try $i)" >> $LOG_RUN
-			    BENCH=`echo "$TA_BMARKS" | grep $d`
+			    BENCH=`echo "$TA_BMARKS" | grep $d | head -n 1`
 			    $bench -b "$BENCH" -i "$i" -d "$d" >> $LOG_RUN 2>&1
 		 	    echo "---> Function call test: Finish stat_func with $d KB buffer dimension (Try $i)" >> $LOG_RUN
 			done
